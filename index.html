@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <style>
+        *{
+            margin:0 auto;padding:0 auto;
+        }
+        body{
+            background: url("images/bg.jpg") repeat;
+            height:100%;
+        }
+
+        div#content{
+            width:70%;
+            height:600px;
+            margin:0 auto;
+            text-align: center;
+
+            position: relative;
+        }
+        div#content>a{
+            margin-top: 200px;
+            display: inline-block;
+        }
+        div#content>a:first-child{
+            margin-right: 20px;
+        }
+        div#content>a img{
+            width:200px;
+            height:200px;
+        }
+
+        div#writeDown{
+            left:0;
+            top:0;
+            position: absolute;
+        }
+        div#writeDown a{
+            display: inline-block;
+            position: absolute;
+        }
+        div#writeDown a img{
+            width:100px;
+            height:100px;
+        }
+        div#writeDown a:nth-child(1){
+            left:120px;
+            top:130px;
+        }
+        div#writeDown a:nth-child(2){
+            left:70px;
+            top:250px;
+        }
+        div#writeDown a:nth-child(3){
+            left:120px;
+            top:370px;
+        }
+
+        div#check{
+            right:0; top:0;
+            position: absolute;
+        }
+        div#check a{
+            display: inline-block;
+            position: absolute;
+        }
+        div#check a img{
+            width:100px;
+            height:100px;
+        }
+        div#check a:nth-child(1){
+            right:120px;
+            top:130px;
+        }
+        div#check a:nth-child(2){
+            right:70px;
+            top:250px;
+        }
+        div#check a:nth-child(3){
+            right:120px;
+            top:370px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>商品查询系统</title>
+    <script src="jquery-2.1.4.js"></script>
+    <script src="Virginia.js"></script>
+    <script>
+        window.onload = function (event) {
+
+            var event = event || window.event;
+            //alert(window.innerHeight);
+            var odiv = document.getElementById("content");
+            var oa = odiv.getElementsByTagName("a");
+            var odiv2 = document.getElementById("writeDown");
+            var odiv3 = document.getElementById("check");
+            var oa2 = odiv2.getElementsByTagName("a");
+            var oa3 = odiv3.getElementsByTagName("a");
+
+            //这里给中间两个大圆做上效果
+            // 1.移入移出效果
+            // 2.点击的时候弹出一个
+            oa[0].onmouseover = function () {
+                this.firstChild.src = "images/writeDownhover.png";
+            };
+            oa[0].onclick = function () {
+                if(odiv2.style.display == "none"){
+                    odiv2.style.display = "block";
+                    move(odiv2,{"left":0,"opacity":100});
+                }else{
+//                    odiv2.style.display = "none";
+                    move(odiv2,{"left":-40,"opacity":0}, function () {
+                        odiv2.style.display = "none";
+                    });
+                }
+            };
+            oa[0].onmouseout = function () {
+                this.firstChild.src = "images/writeDown.png";
+            };
+            oa[1].onmouseover = function () {
+                this.firstChild.src = "images/checkhover.png";
+            };
+            oa[1].onclick = function () {
+                if(odiv3.style.display == "none"){
+                    odiv3.style.display = "block";
+                    move(odiv3,{"right":0,"opacity":100});
+                }else{
+                    move(odiv3,{"right":-40,"opacity":0}, function () {
+                        odiv3.style.display = "none";
+                    });
+                }
+            };
+            oa[1].onmouseout = function () {
+                this.firstChild.src = "images/check.png";
+            };
+
+            //小圆圆移入移出效果
+            for(var i=0;i<oa2.length;i++){
+                oa2[i].onmouseover = function () {
+                    this.firstChild.style.background = 'url("images/imgBg.png") no-repeat';
+                };
+                oa2[i].onmouseout = function () {
+                    this.firstChild.style.background = "none";
+                };
+            }
+            for(var i=0;i<oa3.length;i++){
+                oa3[i].onmouseover = function () {
+                    this.firstChild.style.background = 'url("images/imgBg.png") no-repeat';
+                };
+                oa3[i].onmouseout = function () {
+                    this.firstChild.style.background = "none";
+                };
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <div id="content">
+        <a href="javascript:;"><img src="images/writeDown.png" alt="lu_ru"/></a>
+        <a href="javascript:;"><img src="images/check.png" alt="cha_xun"/></a>
+        <div id="writeDown" style="display:none;left:-40px;top:0;opacity: 0;position:absolute;">
+            <a href="writenewProInfo.php"><img src="images/newProInfo.png" alt="chan_pin_xin_xi"/></a>
+            <a href="writenopay.php"><img src="images/nopay.png" alt="wei_fu_kuan"/></a>
+            <a href="writecustomInfo.php"><img src="images/custminfo.png" alt="ke_hu_xin_xi"/></a>
+        </div>
+        <div id="check" style="display: none;right:-40px;top:0;opacity: 0;position:absolute;">
+            <a href="checkPrice.php"><img src="images/prodPrice.png" alt="chan_pin_jia_ge"/></a>
+            <a href="checknopay.php"><img src="images/nopay.png" alt="wei_fu_kuan"/></a>
+            <a href="checkcustomInfo.php"><img src="images/custminfo.png" alt="ke_hu_xin_xi"/></a>
+        </div>
+    </div>
+</body>
+</html>
